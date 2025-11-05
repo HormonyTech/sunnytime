@@ -154,21 +154,19 @@ async def reply_to_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     reply_text = text.split(":", 1)[1].strip()
 
-    try:
+try:
     await context.bot.send_message(
         chat_id=last_reply,
-        text=f!Ответ администратора:\n{reply_text}"
+        text=f"Ответ администратора:\n{reply_text}"
     )
     await update.message.reply_text(f"Ответ отправлен пользователю {last_reply}.")
-        # Логируем ответ
-        log_message(last_reply, "admin", update.message)
-
-        # Снимаем флаг ожидания
-        active_chats[last_reply]["awaiting_reply"] = False
-
-    except Exception as e:
-        await update.message.reply_text(f"Ошибка отправки ответа: {e}")
-        logger.error(f"Ошибка ответа {last_reply}: {e}")
+    # Логируем ответ
+    log_message(last_reply, "admin", update.message)
+    # Снимаем флаг ожидания
+    active_chats[last_reply]["awaiting_reply"] = False
+except Exception as e:
+    await update.message.reply_text(f"Ошибка отправки ответа: {e}")
+    logger.error(f"Ошибка ответа {last_reply}: {e}")
 
 # Проверка задержек ответов
 async def check_response_time(context: ContextTypes.DEFAULT_TYPE):
