@@ -155,12 +155,11 @@ async def reply_to_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_text = text.split(":", 1)[1].strip()
 
     try:
-        await context.bot.send_message(
-            chat_id=last_reply,
-            text=f!Ответ администратора:\n{reply_text}"
-        )
-        await update.message.reply_text(f"Ответ отправлен пользователю {last_reply}.")
-
+    await context.bot.send_message(
+        chat_id=last_reply,
+        text=f!Ответ администратора:\n{reply_text}"
+    )
+    await update.message.reply_text(f"Ответ отправлен пользователю {last_reply}.")
         # Логируем ответ
         log_message(last_reply, "admin", update.message)
 
